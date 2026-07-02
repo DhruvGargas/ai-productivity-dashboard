@@ -9,7 +9,7 @@ export default function HeroSection() {
         Your AI assistant is ready to help you stay productive today.
       </p>
 
-      <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+      <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 hover:scale-105 transition duration-300">
         Start Planning
       </button>
     </section>

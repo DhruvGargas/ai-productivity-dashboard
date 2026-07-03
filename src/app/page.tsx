@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Navbar from "@/components/Navbar";
 import DashboardCard from "@/components/DashboardCard";
@@ -9,31 +9,68 @@ import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import TaskList from "@/components/TaskList";
 
-export default function Home() {
-  const [tasks, setTasks] = useState([
-    {
-      text: "🚶 Total Steps - 10,000",
-      completed: false,
-    },
-    {
-      text: "📚 Study Time - 4 Hours",
-      completed: false,
-    },
-    {
-      text: "🏋️ Go to Gym",
-      completed: false,
-    },
-    {
-      text: "🌅 Wake Up Early (6:00 AM)",
-      completed: false,
-    },
-  ]);
+type Task = {
+  text: string;
+  completed: boolean;
+};
 
-  const completedTasks = tasks.filter((task) => task.completed).length;
+const defaultTasks: Task[] = [
+  {
+    text: "🚶 Total Steps - 10,000",
+    completed: false,
+  },
+  {
+    text: "📚 Study Time - 4 Hours",
+    completed: false,
+  },
+  {
+    text: "🏋️ Go to Gym",
+    completed: false,
+  },
+  {
+    text: "🌅 Wake Up Early (6:00 AM)",
+    completed: false,
+  },
+];
+
+export default function Home() {
+  const [tasks, setTasks] = useState<Task[]>(defaultTasks);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("tasks");
+
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
+    }
+
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks, isLoaded]);
+
+  const completedTasks = tasks.filter(
+    (task) => task.completed
+  ).length;
+  const remainingTasks = tasks.length - completedTasks;
+  const focusMinutes = completedTasks * 30;
+
+const focusTime =
+  focusMinutes >= 60
+    ? `${Math.floor(focusMinutes / 60)} Hour${
+        Math.floor(focusMinutes / 60) > 1 ? "s" : ""
+      } ${focusMinutes % 60 !== 0 ? `${focusMinutes % 60} Min` : ""}`.trim()
+    : `${focusMinutes} Min`;
+
   const progress =
-  tasks.length === 0
-    ? 0
-    : Math.round((completedTasks / tasks.length) * 100);
+    tasks.length === 0
+      ? 0
+      : Math.round((completedTasks / tasks.length) * 100);
 
   const dashboardData = [
     {
@@ -42,9 +79,9 @@ export default function Home() {
       value: tasks.length.toString(),
     },
     {
-      icon: "⏰",
-      title: "Focus Time",
-      value: "3 Hours",
+    icon: "⏰",
+    title: "Focus Time",
+    value: focusTime,
     },
     {
       icon: "✅",
@@ -57,6 +94,10 @@ export default function Home() {
       value: `${progress}%`,
     },
   ];
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <>
@@ -85,9 +126,11 @@ export default function Home() {
             </div>
 
             <TaskList
-  tasks={tasks}
-  setTasks={setTasks}
-/>
+            tasks={tasks}
+            setTasks={setTasks}
+            completedTasks={completedTasks}
+            remainingTasks={remainingTasks}
+            />
           </section>
 
           <Footer />

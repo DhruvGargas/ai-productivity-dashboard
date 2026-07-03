@@ -10,44 +10,48 @@ type Task = {
 type TaskListProps = {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  completedTasks: number;
+  remainingTasks: number;
 };
 
 export default function TaskList({
   tasks,
   setTasks,
+  completedTasks,
+  remainingTasks,
 }: TaskListProps) {
   const [newTask, setNewTask] = useState("");
 
   const toggleTask = (index: number) => {
-    const updatedTasks = tasks.map((task, i) => {
-      if (i === index) {
-        return {
-          ...task,
-          completed: !task.completed,
-        };
-      }
-
-      return task;
-    });
-
-    setTasks(updatedTasks);
+    setTasks((prevTasks) =>
+      prevTasks.map((task, i) =>
+        i === index
+          ? {
+              ...task,
+              completed: !task.completed,
+            }
+          : task
+      )
+    );
   };
 
   const addTask = () => {
     if (newTask.trim() === "") return;
 
-    const task = {
+    const task: Task = {
       text: newTask,
       completed: false,
     };
 
-    setTasks([task, ...tasks]);
+    setTasks((prevTasks) => [task, ...prevTasks]);
+
     setNewTask("");
   };
 
   const deleteTask = (index: number) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
+    setTasks((prevTasks) =>
+      prevTasks.filter((_, i) => i !== index)
+    );
   };
 
   return (
@@ -55,6 +59,19 @@ export default function TaskList({
       <h2 className="text-3xl font-bold text-white mb-6">
         Today's Tasks
       </h2>
+      <div className="flex flex-wrap gap-6 mb-6 text-sm">
+  <span className="text-blue-400 font-semibold">
+    📋 Total: {tasks.length}
+  </span>
+
+  <span className="text-green-400 font-semibold">
+    ✅ Completed: {completedTasks}
+  </span>
+
+  <span className="text-yellow-400 font-semibold">
+    ⏳ Remaining: {remainingTasks}
+  </span>
+</div>
 
       {/* Input + Button */}
       <div className="flex gap-3 mb-6">

@@ -5,7 +5,7 @@ export default function Navbar() {
         🤖 AI Productivity Dashboard
       </h2>
 
-      <p>Day 2</p>
+      
     </nav>
   );
 }

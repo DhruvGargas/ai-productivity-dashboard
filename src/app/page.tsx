@@ -125,12 +125,35 @@ const focusTime =
               ))}
             </div>
 
-            <TaskList
-            tasks={tasks}
-            setTasks={setTasks}
-            completedTasks={completedTasks}
-            remainingTasks={remainingTasks}
-            />
+            <>
+  <div className="mt-10 mb-10">
+    <div className="flex justify-between text-white mb-2">
+      <span className="font-semibold">
+        Progress
+      </span>
+
+      <span className="font-semibold">
+        {progress}%
+      </span>
+    </div>
+
+    <div className="w-full h-4 bg-slate-700 rounded-full overflow-hidden">
+      <div
+        className="h-full bg-green-500 transition-all duration-500"
+        style={{
+          width: `${progress}%`,
+        }}
+      ></div>
+    </div>
+  </div>
+
+  <TaskList
+    tasks={tasks}
+    setTasks={setTasks}
+    completedTasks={completedTasks}
+    remainingTasks={remainingTasks}
+  />
+</>
           </section>
 
           <Footer />

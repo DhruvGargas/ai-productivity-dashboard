@@ -1,3 +1,7 @@
+"use client";
+
+import { useTheme } from "@/context/ThemeContext";
+
 type DashboardCardProps = {
   icon: string;
   title: string;
@@ -9,21 +13,27 @@ export default function DashboardCard({
   title,
   value,
 }: DashboardCardProps) {
-  return (
-    <div className="bg-gray-800 p-6 rounded-xl w-64 text-center shadow-lg hover:scale-105 transition">
+  const { theme } = useTheme();
 
-      <div className="text-5xl">
+  return (
+    <div
+      className={`w-64 p-6 rounded-2xl shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl border ${
+        theme === "dark"
+          ? "bg-slate-800 border-slate-700 text-white"
+          : "bg-white border-gray-200 text-gray-900"
+      }`}
+    >
+      <div className="text-5xl text-center">
         {icon}
       </div>
 
-      <h3 className="text-xl font-bold mt-4">
+      <h3 className="text-xl font-bold text-center mt-4">
         {title}
       </h3>
 
-      <p className="text-4xl mt-4 text-blue-400">
+      <p className="text-4xl font-bold text-center mt-4 text-blue-500">
         {value}
       </p>
-
     </div>
   );
 }

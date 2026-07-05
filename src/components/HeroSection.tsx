@@ -1,16 +1,38 @@
+"use client";
+
+import { useTheme } from "@/context/ThemeContext";
+
 export default function HeroSection() {
+  const { theme } = useTheme();
+
   return (
-    <section className="flex flex-col items-center justify-center h-[60vh] gap-6">
-      <h1 className="text-5xl font-bold">
+    <section
+      className={`flex flex-col items-center justify-center text-center px-8 py-24 transition-all duration-300 ${
+        theme === "dark"
+          ? "bg-slate-950 text-white"
+          : "bg-gray-100 text-gray-900"
+      }`}
+    >
+      {/* Welcome Heading */}
+      <h1 className="text-5xl md:text-6xl font-extrabold mb-6">
         Welcome Back, Dhruv 👋
       </h1>
 
-      <p className="text-xl text-gray-400">
-        Your AI assistant is ready to help you stay productive today.
+      {/* Subtitle */}
+      <p
+        className={`text-xl max-w-2xl leading-8 mb-10 ${
+          theme === "dark"
+            ? "text-gray-400"
+            : "text-gray-600"
+        }`}
+      >
+        Your AI Productivity Dashboard is ready to help you organize
+        tasks, stay focused, and achieve your daily goals.
       </p>
 
-      <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 hover:scale-105 transition duration-300">
-        Start Planning
+      {/* Button */}
+      <button className="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all duration-300">
+        🚀 Start Planning
       </button>
     </section>
   );

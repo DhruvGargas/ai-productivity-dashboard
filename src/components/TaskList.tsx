@@ -153,12 +153,13 @@
   };
     return (
       <section
-    className={`mt-12 transition-all duration-300 ${
-      theme === "dark"
-        ? "text-white"
-        : "text-gray-900"
-    }`}
-  >
+  id="tasks"
+  className={`mt-12 transition-all duration-300 ${
+    theme === "dark"
+      ? "text-white"
+      : "text-gray-900"
+  }`}
+>
         <h2
   className={`text-3xl font-bold mb-6 ${
     theme === "dark" ? "text-white" : "text-gray-900"

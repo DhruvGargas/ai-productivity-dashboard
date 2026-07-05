@@ -18,6 +18,16 @@ export default function Sidebar({
 }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const { theme } = useTheme();
+  const scrollToSection = (id: string) => {
+  const section = document.getElementById(id);
+
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
 
   const today = new Date();
 
@@ -76,54 +86,61 @@ export default function Sidebar({
       {/* Navigation */}
 <nav className="flex flex-col gap-3">
 
-  <button className="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 font-semibold">
-    <span className="text-xl">🏠</span>
-    {!collapsed && <span>Dashboard</span>}
-  </button>
+  <button
+  onClick={() => scrollToSection("dashboard")}
+  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 font-semibold hover:bg-blue-700 transition"
+>
+  <span className="text-xl">🏠</span>
+  {!collapsed && <span>Dashboard</span>}
+</button>
 
   <button
-    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
-      theme === "dark"
-        ? "hover:bg-slate-800"
-        : "hover:bg-gray-100"
-    }`}
-  >
-    <span className="text-xl">📋</span>
-    {!collapsed && <span>Tasks</span>}
-  </button>
+  onClick={() => scrollToSection("tasks")}
+  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
+    theme === "dark"
+      ? "hover:bg-slate-800"
+      : "hover:bg-gray-100"
+  }`}
+>
+  <span className="text-xl">📋</span>
+  {!collapsed && <span>Tasks</span>}
+</button>
 
   <button
-    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
-      theme === "dark"
-        ? "hover:bg-slate-800"
-        : "hover:bg-gray-100"
-    }`}
-  >
-    <span className="text-xl">📅</span>
-    {!collapsed && <span>Calendar</span>}
-  </button>
+  onClick={() => scrollToSection("calendar")}
+  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
+    theme === "dark"
+      ? "hover:bg-slate-800"
+      : "hover:bg-gray-100"
+  }`}
+>
+  <span className="text-xl">📅</span>
+  {!collapsed && <span>Calendar</span>}
+</button>
 
   <button
-    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
-      theme === "dark"
-        ? "hover:bg-slate-800"
-        : "hover:bg-gray-100"
-    }`}
-  >
-    <span className="text-xl">📊</span>
-    {!collapsed && <span>Analytics</span>}
-  </button>
+  onClick={() => scrollToSection("analytics")}
+  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
+    theme === "dark"
+      ? "hover:bg-slate-800"
+      : "hover:bg-gray-100"
+  }`}
+>
+  <span className="text-xl">📊</span>
+  {!collapsed && <span>Analytics</span>}
+</button>
 
   <button
-    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
-      theme === "dark"
-        ? "hover:bg-slate-800"
-        : "hover:bg-gray-100"
-    }`}
-  >
-    <span className="text-xl">⚙️</span>
-    {!collapsed && <span>Settings</span>}
-  </button>
+  onClick={() => scrollToSection("settings")}
+  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
+    theme === "dark"
+      ? "hover:bg-slate-800"
+      : "hover:bg-gray-100"
+  }`}
+>
+  <span className="text-xl">⚙️</span>
+  {!collapsed && <span>Settings</span>}
+</button>
 
 </nav>
 

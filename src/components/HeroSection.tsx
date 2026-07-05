@@ -6,7 +6,7 @@ export default function HeroSection() {
   const { theme } = useTheme();
 
   return (
-    <section
+    <section id="dashboard"
       className={`flex flex-col items-center justify-center text-center px-8 py-24 transition-all duration-300 ${
         theme === "dark"
           ? "bg-slate-950 text-white"

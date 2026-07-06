@@ -1,6 +1,12 @@
 # AI Productivity Dashboard
 
 A modern, full-featured productivity dashboard built with **Next.js** and **React**. Organize daily tasks, track your progress, visualize productivity metrics, and stay focused — all in a beautiful dark/light interface that persists your data locally.
+
+##🌐 Live Demo
+
+https://ai-productivity-dashboard-ecru.vercel.app/
+
+
 ---
 
 ## Features

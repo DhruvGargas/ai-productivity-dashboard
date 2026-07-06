@@ -8,6 +8,9 @@ import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 import Sidebar from "@/components/Sidebar";
 import TaskList from "@/components/TaskList";
+import Analytics from "@/components/Analytics";
+import CalendarView from "@/components/CalendarView";
+import Settings from "@/components/Settings";
 
 type Task = {
   text: string;
@@ -142,26 +145,7 @@ const focusTime =
           <HeroSection />
 
           <section className="px-10 pb-10">
-            <h2
-  className={`text-3xl font-bold mb-8 ${
-    theme === "dark"
-      ? "text-white"
-      : "text-gray-900"
-  }`}
->
-              Today's Overview
-            </h2>
-
-            <div className="flex flex-wrap gap-6">
-              {dashboardData.map((card) => (
-                <DashboardCard
-                  key={card.title}
-                  icon={card.icon}
-                  title={card.title}
-                  value={card.value}
-                />
-              ))}
-            </div>
+            
 
             <>
   <div className="mt-10 mb-10">
@@ -203,33 +187,19 @@ const focusTime =
     remainingTasks={remainingTasks}
   />
 </>
-<section id="analytics" className="mt-20">
-  <h2 className="text-3xl font-bold mb-6">
-    📊 Analytics
-  </h2>
-
-  <div className="border-2 border-dashed border-gray-400 rounded-xl p-10 text-center text-gray-500">
-    Analytics section coming soon...
-  </div>
-</section>
-<section id="calendar" className="mt-20">
-  <h2 className="text-3xl font-bold mb-6">
-    📅 Calendar
-  </h2>
-
-  <div className="border-2 border-dashed border-gray-400 rounded-xl p-10 text-center text-gray-500">
-    Calendar section coming soon...
-  </div>
-</section>
-<section id="settings" className="mt-20 mb-20">
-  <h2 className="text-3xl font-bold mb-6">
-    ⚙️ Settings
-  </h2>
-
-  <div className="border-2 border-dashed border-gray-400 rounded-xl p-10 text-center text-gray-500">
-    Settings section coming soon...
-  </div>
-</section>
+<Analytics
+  tasks={tasks}
+  completedTasks={completedTasks}
+  remainingTasks={remainingTasks}
+  progress={progress}
+  focusTime={focusTime}
+/>
+<CalendarView tasks={tasks} />
+<Settings
+  tasks={tasks}
+  setTasks={setTasks}
+  defaultTasks={defaultTasks}
+/>
           </section>
 
           <Footer />

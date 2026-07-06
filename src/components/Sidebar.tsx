@@ -17,8 +17,11 @@ export default function Sidebar({
   progress,
 }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
+const [activeSection, setActiveSection] = useState("dashboard");
   const { theme } = useTheme();
   const scrollToSection = (id: string) => {
+  setActiveSection(id);
+
   const section = document.getElementById(id);
 
   if (section) {
@@ -61,34 +64,32 @@ export default function Sidebar({
   }`}
 >
       {/* Collapse Button */}
-      <div className="flex justify-end mb-6">
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="text-2xl hover:text-blue-400 transition"
-        >
-          {collapsed ? "➡️" : "⬅️"}
-        </button>
-      </div>
-
-      {/* Logo */}
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold text-blue-400">
-          {collapsed ? "🚀" : "🚀 Productivity"}
-        </h1>
-
-        {!collapsed && (
-          <p className="text-gray-400 text-sm mt-2">
-            Stay focused. Stay productive.
-          </p>
-        )}
-      </div>
+      <div
+  className={`flex mb-5 ${
+    collapsed ? "justify-center" : "justify-end"
+  }`}
+>
+  <button
+    onClick={() => setCollapsed(!collapsed)}
+    className="w-10 h-10 flex items-center justify-center text-3xl hover:text-blue-400 transition"
+  >
+    ☰
+  </button>
+</div>
+      
 
       {/* Navigation */}
 <nav className="flex flex-col gap-3">
 
   <button
   onClick={() => scrollToSection("dashboard")}
-  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 font-semibold hover:bg-blue-700 transition"
+  className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all duration-300 ${
+    activeSection === "dashboard"
+      ? "bg-blue-600 text-white"
+      : theme === "dark"
+      ? "hover:bg-slate-800"
+      : "hover:bg-gray-100"
+  }`}
 >
   <span className="text-xl">🏠</span>
   {!collapsed && <span>Dashboard</span>}
@@ -96,8 +97,10 @@ export default function Sidebar({
 
   <button
   onClick={() => scrollToSection("tasks")}
-  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
-    theme === "dark"
+  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+    activeSection === "tasks"
+      ? "bg-blue-600 text-white"
+      : theme === "dark"
       ? "hover:bg-slate-800"
       : "hover:bg-gray-100"
   }`}
@@ -107,7 +110,13 @@ export default function Sidebar({
 </button>
 
   <button
-  onClick={() => scrollToSection("calendar")}
+  onClick={() =>
+    document
+      .getElementById("calendar")
+      ?.scrollIntoView({
+        behavior: "smooth",
+      })
+  }
   className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
     theme === "dark"
       ? "hover:bg-slate-800"
@@ -120,8 +129,10 @@ export default function Sidebar({
 
   <button
   onClick={() => scrollToSection("analytics")}
-  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
-    theme === "dark"
+  className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+    activeSection === "analytics"
+      ? "bg-blue-600 text-white"
+      : theme === "dark"
       ? "hover:bg-slate-800"
       : "hover:bg-gray-100"
   }`}
@@ -131,7 +142,13 @@ export default function Sidebar({
 </button>
 
   <button
-  onClick={() => scrollToSection("settings")}
+  onClick={() =>
+    document
+      .getElementById("settings")
+      ?.scrollIntoView({
+        behavior: "smooth",
+      })
+  }
   className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
     theme === "dark"
       ? "hover:bg-slate-800"

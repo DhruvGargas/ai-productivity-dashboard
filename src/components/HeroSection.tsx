@@ -6,8 +6,9 @@ export default function HeroSection() {
   const { theme } = useTheme();
 
   return (
-    <section id="dashboard"
-      className={`flex flex-col items-center justify-center text-center px-8 py-24 transition-all duration-300 ${
+   <section
+  id="dashboard"
+  className={`flex flex-col items-center justify-center text-center px-8 min-h-[85vh] transition-all duration-300 ${
         theme === "dark"
           ? "bg-slate-950 text-white"
           : "bg-gray-100 text-gray-900"
@@ -15,7 +16,7 @@ export default function HeroSection() {
     >
       {/* Welcome Heading */}
       <h1 className="text-5xl md:text-6xl font-extrabold mb-6">
-        Welcome Back, Dhruv 👋
+        Welcome 👋
       </h1>
 
       {/* Subtitle */}
@@ -31,9 +32,18 @@ export default function HeroSection() {
       </p>
 
       {/* Button */}
-      <button className="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all duration-300">
-        🚀 Start Planning
-      </button>
+      <button
+  onClick={() => {
+    document
+      .getElementById("tasks")
+      ?.scrollIntoView({
+        behavior: "smooth",
+      });
+  }}
+  className="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all duration-300 mt-8"
+>
+  💪Start Planning
+</button>
     </section>
   );
 }

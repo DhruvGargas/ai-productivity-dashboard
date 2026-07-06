@@ -25,6 +25,7 @@ export function ThemeProvider({
 }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
+  // Load saved theme
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
 
@@ -33,8 +34,15 @@ export function ThemeProvider({
     }
   }, []);
 
+  // Save theme + Apply dark class to HTML
   useEffect(() => {
     localStorage.setItem("theme", theme);
+
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }, [theme]);
 
   const toggleTheme = () => {

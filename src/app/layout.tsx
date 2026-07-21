@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/context/ThemeContext";
+import { AuthProvider } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AI Productivity Dashboard",
-  description: "A dashboard built using Next.js and React",
+  description: "A productivity dashboard built using Next.js, React, and Firebase Authentication",
 };
 
 export default function RootLayout({
@@ -30,7 +31,9 @@ export default function RootLayout({
     >
       <body className="h-full">
         <ThemeProvider>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

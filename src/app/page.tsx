@@ -11,6 +11,7 @@ import TaskList from "@/components/TaskList";
 import Analytics from "@/components/Analytics";
 import CalendarView from "@/components/CalendarView";
 import Settings from "@/components/Settings";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 type Task = {
   text: string;
@@ -118,7 +119,7 @@ const focusTime =
   }
 
   return (
-  <>
+    <ProtectedRoute>
       <Navbar/>
 
       <main
@@ -204,7 +205,7 @@ const focusTime =
 
           <Footer />
         </div>
-            </main>
-    </>
+      </main>
+    </ProtectedRoute>
   );
 }
